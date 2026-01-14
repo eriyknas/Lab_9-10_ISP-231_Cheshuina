@@ -1,3 +1,8 @@
+package modules
+
+import resources.OutpostResource
+import resources.ResourceManager
+
 class ResearchLab: OutpostModule("Исследовательска лаборатория") {
     override fun performAction(manager: ResourceManager) {
         val minerals = manager.get("Minerals")
@@ -9,8 +14,8 @@ class ResearchLab: OutpostModule("Исследовательска лабора�
 }
 fun main(){
     val manager = ResourceManager()
-    manager.add(OutpostResource(1,"Minerals",120))
-    manager.add(OutpostResource(2,"Gas",40))
+    manager.add(OutpostResource(1, "Minerals", 120))
+    manager.add(OutpostResource(2, "Gas", 40))
     val generator = EnergyGenerator()
     val lab = ResearchLab()
     generator.performAction(manager)
