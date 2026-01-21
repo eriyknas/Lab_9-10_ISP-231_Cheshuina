@@ -1,15 +1,21 @@
 package modules
 
+import handleModuleResult
 import resources.OutpostResource
 import resources.ResourceManager
 
 class ResearchLab: OutpostModule("Исследовательска лаборатория") {
-    override fun performAction(manager: ResourceManager) {
+    override fun performAction(manager: ResourceManager): ModuleResult {
         val minerals = manager.get("Minerals")
         if (minerals == null || minerals.amount < 30){
-            println("Недостаточно минералов для исследования")
-            return
+            return ModuleResult.NotEnoughResources(
+                resourceName = "Minerals",
+                required = 30,
+                available = minerals?.amount ?: 0
+            )
         }
+        minerals.amount -= 30
+        return ModuleResult.Success("Исследование завершено")
     }
 }
 fun main(){
@@ -18,8 +24,10 @@ fun main(){
     manager.add(OutpostResource(2, "Gas", 40))
     val generator = EnergyGenerator()
     val lab = ResearchLab()
-    generator.performAction(manager)
-    lab.performAction(manager)
+    val generatorResult = generator.performAction(manager)
+    val labResult = lab.performAction(manager)
+    handleModuleResult(generatorResult)
+    handleModuleResult(labResult)
     println()
     manager.printAll()
 }
