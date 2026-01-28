@@ -1,7 +1,6 @@
 package example
 import kotlin.properties.Delegates
 
-class UserProfile(initialName: String, initialEmail: String){}
 class GameHero (startName: String){
     var name: String by Delegates.observable(startName){ _, old, new ->
         println("[$old] получил новое имя: $new!")

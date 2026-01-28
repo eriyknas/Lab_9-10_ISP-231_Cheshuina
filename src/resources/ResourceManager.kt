@@ -6,9 +6,7 @@ class ResourceManager {
         resources.add(resource)
         println("Добавлен ресурс: ${resource.name}")
     }
-    fun get(name: String): OutpostResource?{
-    return resources.find { it.name == name }
-    }
+    fun getAll(): List<OutpostResource> = resources.toList()
     fun printAll(){
         println("Ресурсы базы")
         resources.forEach { println("${it.name}: ${it.amount}") }
