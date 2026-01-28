@@ -18,6 +18,7 @@ class ResearchLab: OutpostModule("Исследовательска лабора�
         return ModuleResult.Success("Исследование завершено")
     }
 }
+
 fun main(){
     val manager = ResourceManager()
     manager.add(OutpostResource(1, "Minerals", 120))
